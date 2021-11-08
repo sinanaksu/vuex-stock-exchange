@@ -57,7 +57,15 @@ export default new Vuex.Store({
         )
         
     },
-
+    getSymbolData({ state }, data) {
+      return axios.get(state.apiURL + 'function=' + data.series + '&symbol=' + data.symbol, {
+      })
+    .then(res => {
+          state.chartData = res.data;
+          console.log("getSymbolData:" + data.symbol);
+      })
+      .catch(err => console.log(err))
+    },
   },
   modules: {},
 });
